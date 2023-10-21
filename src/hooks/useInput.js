@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const useInput = (validateValue) => { // Name 과 관련된 부분
+const useInput = (validateValue) => { // Name 과 관련된 부분으로 만든 커스텀 훅
     const [enteredValue, setEnteredValue] = useState('');
     const [isTouched, setIsTouched] = useState(false);
 
