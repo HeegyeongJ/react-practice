@@ -1,20 +1,32 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Cart from './components/Cart/Cart';
 import Layout from './components/Layout/Layout';
 import Products from './components/Shop/Products';
 import { useEffect } from 'react';
+import { sendCartData } from './store/cart-slice';
+
+let isInitial = true;
 
 function App() {
   const showCart = useSelector((state) => state.ui.cartIsVisible);
   const cart = useSelector(state => state.cart);
-  
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    fetch('https://react-test-cf689-default-rtdb.firebaseio.com/cart.json',{
-      method: 'PUT',
-      body: JSON.stringify(cart)
-    })
-  }, [cart])
+    if(isInitial){
+      isInitial = false;
+      return;
+    }
+    dispatch(sendCartData())
+  }, [cart, dispatch])
+  
+  // useEffect(() => {
+  //   fetch('https://react-test-cf689-default-rtdb.firebaseio.com/cart.json',{
+  //     method: 'PUT',
+  //     body: JSON.stringify(cart)
+  //   })
+  // }, [cart]);
 
   return (
     <Layout>

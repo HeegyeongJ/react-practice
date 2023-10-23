@@ -1,5 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export const sendCartData = (cart) => {
+  return async (dispatch) => {
+    const sendRequest = async () => {
+      const response = await fetch('https://react-test-cf689-default-rtdb.firebaseio.com/cart.json',{
+        method: 'PUT',
+        body: JSON.stringify(cart)
+      })
+      if(!response.ok){
+        throw new Error('실패');
+      }
+    }
+
+    try{
+      await sendRequest();
+    }catch(error){
+      console.error(error.message);
+    }
+  }
+}
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
