@@ -21,11 +21,33 @@ const counterSlice = createSlice({
   }
 })
 
-const store = configureStore({
-  reducer: counterSlice.reducer,
+// 인증 여부
+const initialAuthState = {
+  isAuthenticated: false
+}
+
+const authSlice = createSlice({
+  name: 'authentication',
+  initialState: initialAuthState,
+  reducers: {
+    login(state) {
+      state.isAuthenticated = true;
+    },
+    logout(state) {
+      state.isAuthenticated = false;
+    }
+  }
 })
 
+const store = configureStore({
+  reducer: {
+    counter: counterSlice.reducer,
+    auth: authSlice.reducer,
+  }
+});
+
 export const counterActions = counterSlice.actions;
+export const authActions = authSlice.actions;
 
 // const counterReducer = (state = initialState, action) => {
 //   if (action.type === 'increment') {
