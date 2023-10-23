@@ -1,5 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+
+export const fetchCartData = () => {
+  return async (dispatch) => {
+    const fetchData = async () => {
+      const response = await fetch('https://react-test-cf689-default-rtdb.firebaseio.com/cart.json')
+      if(!response.ok){
+        throw new Error('실패');
+      }
+      const data = await response.json();
+      return data;
+    };
+    try{
+      const cartData = await fetchData();
+      dispatch(cartActions.replaceCart(cartData));
+    }catch(error){
+      // 에러 처리
+    }
+  };
+}
+
 export const sendCartData = (cart) => {
   return async (dispatch) => {
     const sendRequest = async () => {
@@ -27,6 +47,10 @@ const cartSlice = createSlice({
     totalQuantity: 0,
   },
   reducers: {
+    replaceCart(state, action){ // data 받아왔을 때 replace
+      state.totalQuantity = action.payload.totalQuantity;
+      state.items = action.payload.items;
+    },
     addItemToCart(state, action) { /*TODO- 여기에 코드를 작성해 주세요*/
       const newItem = action.payload
       const existingItem = state.items.find(item => item.id === newItem.id);

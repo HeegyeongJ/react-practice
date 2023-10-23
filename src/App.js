@@ -4,9 +4,9 @@ import Cart from './components/Cart/Cart';
 import Layout from './components/Layout/Layout';
 import Products from './components/Shop/Products';
 import { useEffect } from 'react';
-import { sendCartData } from './store/cart-slice';
+import { fetchCartData, sendCartData } from './store/cart-slice';
 
-let isInitial = true;
+let isInitial = true; 
 
 function App() {
   const showCart = useSelector((state) => state.ui.cartIsVisible);
@@ -14,11 +14,16 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if(isInitial){
+    dispatch(fetchCartData());
+  }, [dispatch])
+
+  useEffect(() => {
+    if(isInitial){ // 최초 1회만 데이터를 보내게?
       isInitial = false;
       return;
     }
-    dispatch(sendCartData())
+
+    dispatch(sendCartData(cart));
   }, [cart, dispatch])
   
   // useEffect(() => {
