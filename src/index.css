@@ -8,3 +8,7 @@ body {
   color: #252525;
 }
 
+.invalid:focus{
+  outline: none;
+  border-color: red;
+}

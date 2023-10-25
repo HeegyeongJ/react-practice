@@ -1,10 +1,13 @@
 import React from 'react';
 
-const Items = (props) => {
+const Items = ({items}) => {
     return (
-        <div>
-            
-        </div>
+        
+        <ul>
+            {items.map(item => (
+                <li key={item}>{item}</li>
+            ))}
+        </ul>
     );
 };
 
