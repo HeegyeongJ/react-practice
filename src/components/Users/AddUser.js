@@ -56,12 +56,16 @@ const AddUser = (props) => {
           <input
             id="username"
             type="text"
+            // value={enteredUsername}
+            // onChange={usernameChangeHandler}
             ref={nameInputRef}
           />
           <label htmlFor="age">나이</label>
           <input
             id="age"
             type="number"
+            // value={enteredAge}
+            // onChange={ageChangeHandler}
             ref={ageInputRef}
           />
           <Button type="submit">사용자 추가</Button>
