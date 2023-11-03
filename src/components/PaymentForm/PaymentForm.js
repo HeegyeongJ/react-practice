@@ -47,7 +47,7 @@ const PaymentForm = ({ getPaymentFormData }) => {
 		<div className={styles.newPayment}>
 			<form onSubmit={buttonSubmitHander}>
 				<div className={styles.newPaymentControls}>
-					<div className={styles.newPaymentControl}>
+					<div className={`${styles.newPaymentControl} ${!objectState.name && styles.isTrue}`}>
 						<label>이름</label>
 						<input
 							type="text"
