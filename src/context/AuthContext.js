@@ -26,13 +26,13 @@ export const AuthContextProvider = (props) => {
     };
 
     return (
-        <AuthContextProvider value={{
+        <AuthContext.Provider value={{
             isLoggedIn: isLoggedIn,
             onLogin: loginHandler,
             onLogout: logoutHandler,
         }}>
             {props.children}
-        </AuthContextProvider>
+        </AuthContext.Provider>
     )
 }
 export default AuthContext;

@@ -50,11 +50,6 @@ const passwordReducer = (state, action) => {
 const Login = () => {
   const context = useContext(AuthContext);
 
-  // const [enteredEmail, setEnteredEmail] = useState('');
-  // const [emailIsValid, setEmailIsValid] = useState();
-  // const [enteredPassword, setEnteredPassword] = useState('');
-  // const [passwordIsValid, setPasswordIsValid] = useState();
-
   const [emailState, dispatchEamil] = useReducer(emailReducer, {
     value: '',
     isValid: null
@@ -73,22 +68,9 @@ const Login = () => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   const identifier = setTimeout(() => {
-  //     console.log('Checking form validity!');
-  //     setFormIsValid(
-  //       enteredEmail.includes('@') && enteredPassword.trim().length > 6
-  //     );
-  //   }, 500);
 
-  //   return () => {
-  //     console.log('CLEANUP');
-  //     clearTimeout(identifier);
-  //   };
-  // }, [enteredEmail, enteredPassword]);
 
   const emailChangeHandler = (event) => {
-    // setEnteredEmail(event.target.value);
     dispatchEamil({ type: 'USER_INPUT', value: event.target.value })
 
     setFormIsValid(
@@ -97,7 +79,6 @@ const Login = () => {
   };
 
   const passwordChangeHandler = (event) => {
-    // setEnteredPassword(event.target.value);
     dispatchPassword({ type: 'USER_INPUT', value: event.target.value })
 
     setFormIsValid(
@@ -106,12 +87,10 @@ const Login = () => {
   };
 
   const validateEmailHandler = () => {
-    // setEmailIsValid(enteredEmail.includes('@'));
     dispatchEamil({ type: 'INPUT_BLUR' })
   };
 
   const validatePasswordHandler = () => {
-    // setPasswordIsValid(enteredPassword.trim().length > 6);
     dispatchPassword({ type: 'INPUT_BLUR' })
   };
 

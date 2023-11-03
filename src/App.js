@@ -1,12 +1,12 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 import Login from './components/Login/Login';
 import Home from './components/Home/Home';
 import MainHeader from './components/MainHeader/MainHeader';
-import AuthContext, { AuthContextProvider } from './context/AuthContext';
+import AuthContext from './context/AuthContext';
 
 function App() {
-  const context = useContext(AuthContext)
+  const context = useContext(AuthContext);
   return (
     <>
       <MainHeader />
@@ -15,7 +15,7 @@ function App() {
         {context.isLoggedIn && <Home />}
       </main>
     </>
-     
+
   );
 }
 
