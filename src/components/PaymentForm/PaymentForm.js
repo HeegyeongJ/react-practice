@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import "./PaymentForm.css";
+import styles from "./PaymentForm.module.css";
 
 const PaymentForm = ({ getPaymentFormData }) => {
 	const [objectState, setObjectState] = useState({
@@ -44,10 +44,10 @@ const PaymentForm = ({ getPaymentFormData }) => {
 	};
 
 	return (
-		<div className="newPayment">
+		<div className={styles.newPayment}>
 			<form onSubmit={buttonSubmitHander}>
-				<div className="newPaymentControls">
-					<div className="newPaymentControl">
+				<div className={styles.newPaymentControls}>
+					<div className={styles.newPaymentControl}>
 						<label>이름</label>
 						<input
 							type="text"
@@ -55,7 +55,7 @@ const PaymentForm = ({ getPaymentFormData }) => {
 							value={objectState.name}
 						/>
 					</div>
-					<div className="newPaymentControl">
+					<div className={styles.newPaymentControl}>
 						<label>금액</label>
 						<input
 							type="number"
@@ -65,7 +65,7 @@ const PaymentForm = ({ getPaymentFormData }) => {
 							value={objectState.price}
 						/>
 					</div>
-					<div className="newPaymentControl">
+					<div className={styles.newPaymentControl}>
 						<label>날짜</label>
 						<input
 							type="date"
@@ -76,7 +76,7 @@ const PaymentForm = ({ getPaymentFormData }) => {
 						/>
 					</div>
 				</div>
-				<div className="newPaymentActions">
+				<div className={styles.newPaymentActions}>
 					<button type="submit">결제 추가</button>
 				</div>
 			</form>
