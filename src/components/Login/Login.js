@@ -64,7 +64,7 @@ const Login = (props) => {
       console.log("clean up");
       clearTimeout(identifier);
     };
-  }, [emailState, passwordState]);
+  }, [emailIsValid, passwordIsValid]);
 
   const emailChangeHandler = (event) => {
     dispatchEmail({ type: "USER_INPUT", val: event.target.value });
@@ -85,7 +85,7 @@ const Login = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
     if (formIsValid) {
-      authCtx.onLogin(emailState.value, passwordState.value);
+      props.onLogin(emailState.value, passwordState.value);
     } else if (!emailIsValid) {
       emailInputRef.current.focus();
     } else {
