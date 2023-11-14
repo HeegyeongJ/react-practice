@@ -4,6 +4,7 @@ import React, {
   useReducer,
   useContext,
   useRef,
+  useCallback,
 } from "react";
 
 import Card from "../UI/Card/Card";
@@ -11,6 +12,7 @@ import classes from "./Login.module.css";
 import Button from "../UI/Button/Button";
 import AuthContext from "../../store/auth-context";
 import Input from "../UI/Input/Input";
+import DummyText from "../UI/DummyText";
 
 const emailReducer = (state, action) => {
   if (action.type === "USER_INPUT") {
@@ -93,34 +95,47 @@ const Login = (props) => {
     }
   };
 
+  console.log("Login Component rendered");
+
+  const foo = useCallback(() => {}, []);
+  const [text, setText] = useState("Alex");
   return (
-    <Card className={classes.login}>
-      <form onSubmit={submitHandler}>
-        <Input
-          isValid={emailState.isValid}
-          label="이메일"
-          type="email"
-          value={emailState.value}
-          onChange={emailChangeHandler}
-          onBlur={validateEmailHandler}
-          ref={emailInputRef}
-        />
-        <Input
-          isValid={passwordState.isValid}
-          label="비밀번호"
-          type="password"
-          value={passwordState.value}
-          onChange={passwordChangeHandler}
-          onBlur={validatePasswordHandler}
-          ref={passwordInputRef}
-        />
-        <div className={classes.actions}>
-          <Button type="submit" className={classes.btn} disabled={!formIsValid}>
-            로그인
-          </Button>
-        </div>
-      </form>
-    </Card>
+    <>
+      <Card className={classes.login}>
+        <form onSubmit={submitHandler}>
+          <Input
+            isValid={emailState.isValid}
+            label="이메일"
+            type="email"
+            value={emailState.value}
+            onChange={emailChangeHandler}
+            onBlur={validateEmailHandler}
+            ref={emailInputRef}
+          />
+          <Input
+            isValid={passwordState.isValid}
+            label="비밀번호"
+            type="password"
+            value={passwordState.value}
+            onChange={passwordChangeHandler}
+            onBlur={validatePasswordHandler}
+            ref={passwordInputRef}
+          />
+          <div className={classes.actions}>
+            <Button
+              type="submit"
+              className={classes.btn}
+              disabled={!formIsValid}
+            >
+              로그인
+            </Button>
+          </div>
+        </form>
+      </Card>
+      <DummyText func={foo} />
+      {/* <DummyText text="alex" /> */}
+      <button onClick={() => setText("Brian")}>컴포넌트 re-evaluate</button>
+    </>
   );
 };
 
