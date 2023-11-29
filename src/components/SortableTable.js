@@ -3,12 +3,30 @@ import { GoArrowDown, GoArrowUp } from 'react-icons/go';
 import Table from './Table';
 
 function SortableTable(props) {
-  const [sortOrder, setSortOrder] = useState(null);
-  const [sortBy, setSortBy] = useState(null);
+  const [sortOrder, setSortOrder] = useState(null); // 'asc' 오름차순 | 'desc' 내림차순
+  const [sortBy, setSortBy] = useState(null);  // '이름' | '점수' | '점수의 제곱'
   const { config, data } = props;
 
   const handleClick = (label) => {
     // TODO - 정렬 화살표 클릭 시 정렬을 해주는 함수
+     if (sortBy && label !== sortBy) {
+      setSortOrder('asc');
+      setSortBy(label);
+      return;
+    }
+
+    if (!sortOrder) {
+      setSortOrder('asc');
+      setSortBy(label);
+      return;
+    } else if (sortOrder === 'asc') {
+      setSortOrder('desc');
+      setSortBy(label);
+    } else if (sortOrder === 'desc') {
+      setSortOrder(null);
+      setSortBy(null);
+    }
+  };
   };
 
   const updatedConfig = config.map((column) => {
@@ -37,6 +55,16 @@ function SortableTable(props) {
     const { sortValue } = config.find((column) => column.label === sortBy);
     sortedData = [...data].sort((a, b) => {
       // TODO - 정렬된 데이터로 바꿔 끼우는 부분 들어갈 comparator 함수
+       const valueA = sortValue(a);
+      const valueB = sortValue(b);
+
+      const reverseOrder = sortOrder === 'asc' ? 1 : -1;
+
+      if (typeof valueA === 'string') {
+        return valueA.localeCompare(valueB) * reverseOrder;
+      } else {
+        return (valueA - valueB) * reverseOrder
+      }
     });
   }
 
